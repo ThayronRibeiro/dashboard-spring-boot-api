@@ -81,7 +81,7 @@ public class ClientController {
 			repository.deleteById(id);
 			return ResponseEntity.ok().build();
 		}
-		throw new ClienteNaoEncontradoException("Cliente não encontrado! Tente novamente");
+		throw new ClienteNaoEncontradoException("Cliente não encontrado!");
 					
 	}
 	
