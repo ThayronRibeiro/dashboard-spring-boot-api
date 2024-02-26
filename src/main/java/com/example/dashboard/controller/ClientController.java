@@ -19,7 +19,7 @@ import com.example.dashboard.model.Client;
 import com.example.dashboard.model.User;
 import com.example.dashboard.model.repository.ClientRepository;
 import com.example.dashboard.model.repository.UserRepository;
-import com.example.dashboard.rest.users.ClientFormRequest;
+import com.example.dashboard.rest.ClientFormRequest;
 import com.example.dashboard.service.exceptions.ClienteNaoEncontradoException;
 import com.example.dashboard.service.exceptions.ForbiddenException;
 import com.example.dashboard.service.exceptions.RecordNotFoundException;

@@ -15,44 +15,43 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
-
 @Entity
 @Table(name = "cliente", uniqueConstraints = {
 		@UniqueConstraint(name = "clientes_constraint", columnNames = { "email" }) })
 public class Client {
-	
+
 	@Id
 	@SequenceGenerator(name = "cliente_id_seq", sequenceName = "cliente_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente_id_seq")
 	private Long id;
-	
+
 	@Column(length = 255)
 	private String nome;
-	
+
 	@Column(length = 255, unique = true)
 	private String email;
-	
+
 	@Column(name = "data_cadastro")
 	private LocalDate dataCadastro;
-	
+
+	@Column(name = "ultima_alteracao")
+	private LocalDate dataAlteracao;
+
 	@ManyToOne(cascade = CascadeType.DETACH)
-	@JoinColumn(name = "usuario_id", referencedColumnName = "id" ,nullable = false)
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
 	private User user;
-	
+
 	public Client() {
 		super();
 	}
-
 
 	public User getUser() {
 		return user;
 	}
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 	@PrePersist
 	public void prePersist() {
@@ -91,6 +90,13 @@ public class Client {
 		this.dataCadastro = dataCadastro;
 	}
 
+	public LocalDate getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(LocalDate dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
 
 	public Client(Long id, String nome, String email, User user, LocalDate dataCadastro) {
 		super();
@@ -101,7 +107,6 @@ public class Client {
 		this.dataCadastro = dataCadastro;
 	}
 
-
 	public Client(String nome, String email, User user, LocalDate dataCadastro) {
 		super();
 		this.nome = nome;
@@ -110,12 +115,14 @@ public class Client {
 		this.dataCadastro = dataCadastro;
 	}
 
-
-
-
-
-	
-	
-	
+	public Client(Long id, String nome, String email, LocalDate dataCadastro, LocalDate dataAlteracao, User user) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.dataCadastro = dataCadastro;
+		this.dataAlteracao = dataAlteracao;
+		this.user = user;
+	}
 
 }

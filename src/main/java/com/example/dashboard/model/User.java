@@ -30,9 +30,10 @@ public class User {
 	private String nome;
 	@Column(name = "data_cadastro")
 	private LocalDate dataCadastro;
+	@Column(name = "ultima_alteracao")
+	private LocalDate dataAlteracao;
 	@Column(name = "acesso_token")
 	private String acessoToken;
-	
 
 	public User() {
 		super();
@@ -51,9 +52,6 @@ public class User {
 		this.senha = senha;
 		this.nome = nome;
 	}
-	
-	
-	
 
 	public User(Long id, String usuario, String senha, String nome, String acessoToken) {
 		super();
@@ -127,7 +125,6 @@ public class User {
 	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-	
 
 	public String getAcessoToken() {
 		return acessoToken;
@@ -135,6 +132,14 @@ public class User {
 
 	public void setAcessoToken(String acessoToken) {
 		this.acessoToken = acessoToken;
+	}
+
+	public LocalDate getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(LocalDate dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
 	}
 
 	@Override

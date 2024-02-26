@@ -1,5 +1,6 @@
 package com.example.dashboard.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.dashboard.model.User;
 import com.example.dashboard.model.repository.UserRepository;
-
-import com.example.dashboard.rest.users.UserFormRequest;
+import com.example.dashboard.rest.UserFormRequest;
 import com.example.dashboard.service.exceptions.ForbiddenException;
 import com.example.dashboard.service.exceptions.RecordNotFoundException;
 
@@ -52,6 +52,7 @@ public class UserController {
 		}
 		User entidadeUsers = user.toModel();
 		entidadeUsers.setDataCadastro(userExist.getDataCadastro());
+		entidadeUsers.setDataAlteracao(LocalDate.now());
 		repository.save(entidadeUsers);
 
 		return ResponseEntity.ok().build();
@@ -63,7 +64,7 @@ public class UserController {
 			throws RecordNotFoundException {
 		Optional<User> userLogin = Optional.of(repository.findByUsuarioAndSenha(usuario, senha));
 		if (userLogin.isPresent()) {
-			System.out.println("Usuário e senha corretas. Usuário logado");
+			System.out.println("Usuário e senha corretas. Usuário " + userLogin.get().getUsuario() + " logado");
 			return new ResponseEntity<>(userLogin.get(), HttpStatus.OK);
 		} else {
 			throw new RecordNotFoundException("Usuário inexistente!");
